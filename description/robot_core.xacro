@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+    
+    <material name="white">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+    </material>
+
+    <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+    </material>
+
+
+    <link name="base_link">
+        
+    </link>
+    <!-- Base Plate -->
+    <joint name="base_plate_joint" type="fixed">
+        <origin xyz="0.0 0.0 0.0091" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="base_plate_link"/>
+    </joint>
+
+    <link name="base_plate_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.091" length="0.0182"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+    </link>
+
+    <!-- Hinge Support -->
+    <joint name="support_base_joint" type="fixed">
+        <origin xyz="0.0 0.0 0.16" rpy="0.0 0.0 0.0"/>
+        <parent link="base_plate_link"/>
+        <child link="support_base_link"/>
+    </joint>
+
+    <link name="support_base_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.011" length="0.32"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+    </link>
+
+    <!-- U shape base -->
+    <joint name="u_shape_base" type="continuous">
+        <parent link="support_base_link"/>
+        <child link="u_shape_base_link"/>
+        <origin xyz="0.0 0.0 0.16" rpy="0.0 0.0 0.0"/>
+        
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="u_shape_base_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.05 0.05 0.015"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+    </link>
+
+    <!-- U Shape Pillars -->
+    <joint name="u_shape_pillar_r_joint" type="fixed">
+        <parent link="u_shape_base_link"/>
+        <child link="u_shape_pillar_r_link"/>
+        <origin xyz="0.02 0.0 0.005" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <link name="u_shape_pillar_r_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.03" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.01 0.05 0.06"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+    </link>
+
+    <joint name="u_shape_pillar_l_joint" type="fixed">
+        <parent link="u_shape_base_link"/>
+        <child link="u_shape_pillar_l_link"/>
+        <origin xyz="-0.02 0.0 0.005" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <link name="u_shape_pillar_l_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.03" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.01 0.05 0.06"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+    </link>
+
+
+    <!-- Pin Connecting both pillars -->
+    <joint name="pillar_connecting_joint" type="fixed">
+        <parent link="u_shape_base_link"/>
+        <child link="pillar_connecting_link"/>
+        <origin xyz="0.0 0.0 0.05" rpy="0.0 ${pi/2} 0.0"/>
+    </joint>
+
+    <link name="pillar_connecting_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.0075" length="0.05"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+    </link>
+
+    <!-- Hinge at the Pin -->
+    <joint name="pin_hinge_joint" type="continuous">
+        <parent link="pillar_connecting_link"/>
+        <child link="pin_hinge_link"/>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${pi/2}"/>
+        <axis xyz="0.0 0.0 1"/>
+        
+    </joint>
+
+    <link name="pin_hinge_link">
+        <visual>
+            <origin xyz="0.0 -0.01 0.0" rpy="${pi/2} 0.0 0.0"/>
+            <geometry>
+                <box size="0.02 0.02 0.04"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+    </link>
+    <!-- Main Beam Link -->
+
+    <joint name="beam_joint" type="fixed">
+        <parent link="pin_hinge_link"/>
+        <child link="beam_link"/>
+        <origin xyz="0.0 -0.02375 0.0" rpy="0.0 0.0 ${pi/2}"/>
+    </joint>
+
+
+    <link name="beam_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.012 0.55 0.012"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+    </link>
+</robot>
