@@ -9,7 +9,6 @@
         <color rgba="0.0 0.0 0.0 1.0"/>
     </material>
 
-
     <link name="base_link">
         
     </link>
@@ -117,11 +116,13 @@
     </link>
 
     <!-- Hinge at the Pin -->
-    <joint name="pin_hinge_joint" type="continuous">
+    <joint name="pin_hinge_joint" type="revolute">
         <parent link="pillar_connecting_link"/>
         <child link="pin_hinge_link"/>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${pi/2}"/>
         <axis xyz="0.0 0.0 1"/>
+        <limit lower="-0.39" upper="0.39" effort="0.0" velocity="0.0"/>
+        
         
     </joint>
 
@@ -142,14 +143,13 @@
         <origin xyz="0.0 -0.02375 0.0" rpy="0.0 0.0 ${pi/2}"/>
     </joint>
 
-
     <link name="beam_link">
         <visual>
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
             <geometry>
                 <box size="0.012 0.55 0.012"/>
             </geometry>
-            <material name="white"/>
+            <material name="black"/>
         </visual>
     </link>
 </robot>
