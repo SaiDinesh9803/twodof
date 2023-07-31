@@ -23,7 +23,7 @@
             <geometry>
                 <cylinder radius="0.02" length="0.01"/>
             </geometry>
-            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 ${pi} 0.0"/>
             <material name="gray"/>    
         </visual>
     </link>
@@ -45,10 +45,63 @@
         </visual>
     </link>
 
+
     <joint name="base_joint__motor_pitch" type="fixed">
         <parent link="beam_link"/>
         <child link="base_link_motor_pitch"/>
         <origin xyz="0.01 -0.25 0.0" rpy="0.0 ${pi/2} 0.0"/>
     </joint>
+
+    <!-- Rotors for BLDC  -->
     
+    <link name="rotor_L">
+        <visual>
+            <geometry>
+                <cylinder radius="0.12" length="0.001"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <joint name="rotor_l_joint" type="continuous">
+        <parent link="base_link_motor_b_L"/>
+        <child link="rotor_L"/>
+        <origin xyz="0.0 0.0 0.005" rpy="0.0 0.0 0.0"/>
+        <axis xyz="0.0 0.0 1.0"/>
+    </joint>
+
+    <link name="rotor_R">
+        <visual>
+            <geometry>
+                <cylinder radius="0.12" length="0.001"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <joint name="rotor_r_joint" type="continuous">
+        <parent link="base_link_motor_b_R"/>
+        <child link="rotor_R"/>
+        <origin xyz="0.0 0.0 -0.005" rpy="0.0 0.0 0.0"/>
+        <axis xyz="0.0 0.0 1.0"/>
+    </joint>
+
+    <link name="rotor_pitch">
+        <visual>
+            <geometry>
+                <cylinder radius="0.12" length="0.001"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <joint name="rotor_pitch_joint" type="continuous">
+        <parent link="base_link_motor_pitch"/>
+        <child link="rotor_pitch"/>
+        <origin xyz="0.0 0.0 0.005" rpy="0.0 0.0 0.0"/>
+        <axis xyz="0.0 0.0 1.0"/>
+    </joint>
 </robot>
