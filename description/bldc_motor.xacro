@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="bldc_motor">
+
+    <!-- Bldc Motors Base -->
+    <link name="base_link_motor_b_L">
+        <visual>
+            <geometry>
+                <cylinder radius="0.02" length="0.01"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <material name="gray"/>    
+        </visual>
+    </link>
+
+    <joint name="base_joint_b_L" type="fixed">
+        <parent link="beam_link"/>
+        <child link="base_link_motor_b_L"/>
+        <origin xyz="0.0 0.25 0.01" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <link name="base_link_motor_b_R">
+        <visual>
+            <geometry>
+                <cylinder radius="0.02" length="0.01"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <material name="gray"/>    
+        </visual>
+    </link>
+
+    <joint name="base_joint_b_R" type="fixed">
+        <parent link="beam_link"/>
+        <child link="base_link_motor_b_R"/>
+        <origin xyz="0.0 0.20 -0.01" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+
+    <link name="base_link_motor_pitch">
+        <visual>
+            <geometry>
+                <cylinder radius="0.02" length="0.01"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <material name="gray"/>    
+        </visual>
+    </link>
+
+    <joint name="base_joint__motor_pitch" type="fixed">
+        <parent link="beam_link"/>
+        <child link="base_link_motor_pitch"/>
+        <origin xyz="0.01 -0.25 0.0" rpy="0.0 ${pi/2} 0.0"/>
+    </joint>
+    
+</robot>

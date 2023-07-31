@@ -9,6 +9,10 @@
         <color rgba="0.0 0.0 0.0 1.0"/>
     </material>
 
+    <material name="gray">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+    </material>
+
     <link name="base_link">
         
     </link>
