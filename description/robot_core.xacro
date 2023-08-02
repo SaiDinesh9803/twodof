@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+    <xacro:include filename="inertial_macros.xacro"/>
     
     <material name="white">
         <color rgba="1.0 1.0 1.0 1.0"/>
@@ -15,6 +17,10 @@
 
     <material name="blue">
         <color rgba="0.0 0.0 1.0 0.5"/>
+    </material>
+
+    <material name="red">
+        <color rgba="1 0 0 1"/>
     </material>
 
     <link name="base_link">
@@ -34,9 +40,24 @@
             </geometry>
             <material name="white"/>
         </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.091" length="0.0182"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass = "1.278403083" length="0.0182" radius="0.091">
+            <origin xyz = "0 0 0" rpy = "0 0 0"/>
+        </xacro:inertial_cylinder>
     </link>
 
-    <!-- Hinge Support -->
+    <gazebo reference="base_plate_link">
+        <material>Gazebo/White</material>
+    </gazebo>
+
+
+    <!-- Base Plate Done -->
+
+    <!-- Vertical Rod Support -->
     <joint name="support_base_joint" type="fixed">
         <origin xyz="0.0 0.0 0.16" rpy="0.0 0.0 0.0"/>
         <parent link="base_plate_link"/>
@@ -51,7 +72,22 @@
             </geometry>
             <material name="white"/>
         </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.011" length="0.32"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass = "0.328434662377" length="0.32" radius="0.091">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </xacro:inertial_cylinder>
     </link>
+
+    <gazebo reference="support_base_link">
+        <material>Gazebo/White</material>
+    </gazebo>
+
+
+    <!-- Vertical Rod is done -->
 
     <!-- U shape base -->
     <joint name="u_shape_base" type="continuous">
@@ -70,7 +106,21 @@
             </geometry>
             <material name="white"/>
         </visual>
+
+        <collision>
+            <geometry>
+                <box size="0.05 0.05 0.015"/>
+            </geometry>
+        </collision>
+
+        <xacro:inertial_box mass= "0.10125" x="0.05" y="0.05" z="0.015">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_box>
     </link>
+
+    <gazebo reference="u_shape_base_link">
+        <material>Gazebo/White</material>
+    </gazebo>
 
     <!-- U Shape Pillars -->
     <joint name="u_shape_pillar_r_joint" type="fixed">
@@ -87,7 +137,22 @@
             </geometry>
             <material name="white"/>
         </visual>
+
+        <collision>
+            <origin xyz="0.0 0.0 0.03" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.01 0.05 0.06"/>
+            </geometry>
+        </collision>
+
+        <xacro:inertial_box mass= "0.081" x="0.01" y="0.05" z="0.06">
+            <origin xyz="0 0 0.3" rpy="0 0 0"/>
+        </xacro:inertial_box>
     </link>
+
+    <gazebo reference="u_shape_pillar_r_link">
+        <material>Gazebo/White</material>
+    </gazebo>
 
     <joint name="u_shape_pillar_l_joint" type="fixed">
         <parent link="u_shape_base_link"/>
@@ -103,8 +168,24 @@
             </geometry>
             <material name="white"/>
         </visual>
+
+        <collision>
+            <origin xyz="0.0 0.0 0.03" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.01 0.05 0.06"/>
+            </geometry>
+        </collision>
+
+        <xacro:inertial_box mass= "0.081" x="0.01" y="0.05" z="0.06">
+            <origin xyz="0 0 0.3" rpy="0 0 0"/>
+        </xacro:inertial_box>
     </link>
 
+    <gazebo reference="u_shape_pillar_l_link">
+        <material>Gazebo/White</material>
+    </gazebo>
+
+    <!-- pillars and fork done -->
 
     <!-- Pin Connecting both pillars -->
     <joint name="pillar_connecting_joint" type="fixed">
@@ -121,7 +202,23 @@
             </geometry>
             <material name="white"/>
         </visual>
+
+        <collision>
+            <geometry>
+                <cylinder radius="0.0075" length="0.05"/>
+            </geometry>
+        </collision>
+
+        <xacro:inertial_cylinder mass= "0.023856469" radius="0.0075" length="0.05">
+            <origin xyz="0 0 0.0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
     </link>
+
+    <gazebo reference="pillar_connecting_link">
+        <material>Gazebo/White</material>
+    </gazebo>
+
+    <!-- Connecting Pin Done -->
 
     <!-- Hinge at the Pin -->
     <joint name="pin_hinge_joint" type="revolute">
@@ -129,9 +226,7 @@
         <child link="pin_hinge_link"/>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${pi/2}"/>
         <axis xyz="0.0 0.0 1"/>
-        <limit lower="-0.39" upper="0.39" effort="0.0" velocity="0.0"/>
-        
-        
+        <limit lower="-0.39" upper="0.39" effort="0.0" velocity="0.0"/>    
     </joint>
 
     <link name="pin_hinge_link">
@@ -142,7 +237,22 @@
             </geometry>
             <material name="white"/>
         </visual>
+
+        <collision>
+            <geometry>
+                <box size="0.02 0.02 0.04"/>
+            </geometry>
+        </collision>
+
+        <xacro:inertial_box mass= "0.0432" x="0.02" y="0.02" z="0.04">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_box>
     </link>
+
+
+    <gazebo reference="pin_hinge_link">
+        <material>Gazebo/White</material>
+    </gazebo>
     <!-- Main Beam Link -->
 
     <joint name="beam_joint" type="fixed">
@@ -159,5 +269,19 @@
             </geometry>
             <material name="black"/>
         </visual>
+
+        <collision>
+            <geometry>
+                <box size="0.012 0.55 0.012"/>
+            </geometry>
+        </collision>
+
+        <xacro:inertial_box mass= "0.21384" x="0.012" y="0.55" z="0.012">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_box>
     </link>
+
+    <gazebo reference="beam_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
 </robot>

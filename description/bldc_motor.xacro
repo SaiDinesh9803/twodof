@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="bldc_motor">
-
+    <xacro:include filename="inertial_macros.xacro"/>
     <!-- Bldc Motors Base -->
     <link name="base_link_motor_b_L">
         <visual>
@@ -10,6 +10,16 @@
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
             <material name="gray"/>    
         </visual>
+
+        <collision>
+            <geometry>
+                <cylinder radius="0.02" length="0.01"/>
+            </geometry>
+        </collision>
+
+        <xacro:inertial_cylinder mass= "0.06" radius="0.02" length="0.01">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
     </link>
 
     <joint name="base_joint_b_L" type="fixed">
@@ -26,6 +36,16 @@
             <origin xyz="0.0 0.0 0.0" rpy="0.0 ${pi} 0.0"/>
             <material name="gray"/>    
         </visual>
+
+        <collision>
+            <geometry>
+                <cylinder radius="0.02" length="0.01"/>
+            </geometry>
+        </collision>
+
+        <xacro:inertial_cylinder mass= "0.06" radius="0.02" length="0.01">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
     </link>
 
     <joint name="base_joint_b_R" type="fixed">
@@ -43,6 +63,15 @@
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
             <material name="gray"/>    
         </visual>
+
+        <collision>
+            <geometry>
+                <cylinder radius="0.02" length="0.01"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass= "0.06" radius="0.02" length="0.01">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
     </link>
 
 
@@ -62,6 +91,16 @@
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
             <material name="blue"/>
         </visual>
+
+        <collision>
+            <geometry>
+                <cylinder radius="0.12" length="0.001"/>
+            </geometry>
+        </collision>
+
+        <xacro:inertial_cylinder mass= "0.02" radius="0.12" length="0.001">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
     </link>
 
     <joint name="rotor_l_joint" type="continuous">
@@ -79,6 +118,15 @@
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
             <material name="blue"/>
         </visual>
+
+        <collision>
+            <geometry>
+                <cylinder radius="0.12" length="0.001"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass= "0.02" radius="0.12" length="0.001">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
     </link>
 
     <joint name="rotor_r_joint" type="continuous">
@@ -96,6 +144,16 @@
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
             <material name="blue"/>
         </visual>
+
+        <collision>
+            <geometry>
+                <cylinder radius="0.12" length="0.001"/>
+            </geometry>
+        </collision>
+
+        <xacro:inertial_cylinder mass= "0.02" radius="0.12" length="0.001">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
     </link>
 
     <joint name="rotor_pitch_joint" type="continuous">

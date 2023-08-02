@@ -4,5 +4,7 @@
     <!-- Example link -->
     <xacro:include filename="robot_core.xacro"/>
     <xacro:include filename="bldc_motor.xacro"/>
+    <xacro:include filename="imu.xacro"/>
+    <xacro:include filename="camera.xacro"/>
 
 </robot>
